@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>あんスタ推し診断</title>
+<style>
+.likert-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.left-label, .right-label {
+  width: 120px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.likert {
+  display: flex;
+  gap: 10px;
+}
+
+.likert input {
+  display: none;
+}
+
+.likert span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid #ccc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.likert input:checked + span {
+  background-color: #4CAF50; /* MBTI 風の緑 */
+  border-color: #4CAF50;
+  transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+
+<h1>あんスタ推し診断</h1>
+<form id="quizForm">
+
+  <!-- 1〜14問を自動生成するための枠 -->
+  <div id="questions"></div>
+
+  <button type="submit">診断する</button>
+</form>
+
+<script>
+// 14問のテキスト
+const questions = [
+  "正統派ヒーローより、少しダークでヴィランっぽいキャラが好き。",
+  "天才肌でなんでもこなすキャラより、努力家に惹かれる。",
+  "人に世話を焼かれたり、甘えたりするキャラが好き。",
+  "現実よりも、夢や理想を語るキャラに惹かれる。",
+  "素直に気持ちを表せない、ツンデレ気質のキャラが好きだ。",
+  "静かで落ち着いたキャラより、賑やかで明るいキャラに惹かれる。",
+  "芸術肌な感性をもつキャラより、体育会系のアツいキャラが好き。",
+  "情緒の波が大きい、感情豊かなキャラに惹かれる。",
+  "クセが強くて個性的なキャラより、親しみやすいキャラが好き。",
+  "幼さやショタっぽさのあるキャラに惹かれる。",
+  "中性的で柔らかいキャラよりも、男らしくてかっこいいキャラが好き。",
+  "誰かに依存する側よりも、依存される側のキャラが好き。",
+  "本音をあまり語らず、内面を隠すキャラが気になる。",
+  "清廉で純粋なキャラより、妖艶でミステリアスなキャラに惹かれる。"
+];
+
+// HTMLに質問を生成
+const axisLabels = [
+  ["ヒーロー", "ヴィラン"],
+  ["天才肌", "努力家"],
+  ["面倒見が良い", "支えられたり甘える"],
+  ["現実的", "夢や理想"],
+  ["素直", "ツンデレ"],
+  ["静か", "賑やか"],
+  ["芸術肌", "体育会系"],
+  ["穏やかで安定", "情緒が激しい"],
+  ["クセが強い", "親しみやすい"],
+  ["ショタっぽくない", "ショタっぽい"],
+  ["中性的", "男らしい"],
+  ["依存する側", "依存される側"],
+  ["言語化する", "本音を隠す"],
+  ["清廉で純粋", "妖艶でミステリアス"]
+];
+
+const container = document.getElementById("questions");
+
+questions.forEach((q, i) => {
+  const div = document.createElement("div");
+  div.className = "question";
+  div.innerHTML = `
+    <p><b>Q${i+1}.</b> ${q}</p>
+
+    <div class="likert-block">
+      <span class="left-label">${axisLabels[i][0]}</span>
+
+      <div class="likert">
+        <label><input type="radio" name="q${i}" value="1" required><span></span></label>
+        <label><input type="radio" name="q${i}" value="2"><span></span></label>
+        <label><input type="radio" name="q${i}" value="3"><span></span></label>
+        <label><input type="radio" name="q${i}" value="4"><span></span></label>
+        <label><input type="radio" name="q${i}" value="5"><span></span></label>
+      </div>
+
+      <span class="right-label">${axisLabels[i][1]}</span>
+    </div>
+  `;
+  container.appendChild(div);
+});
+
+// 回答送信
+document.getElementById("quizForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const answers = [];
+  for (let i = 0; i < 14; i++) {
+    answers.push(Number(document.querySelector(`input[name="q${i}"]:checked`).value));
+  }
+
+  // 結果ページへ渡す
+  localStorage.setItem("userAnswers", JSON.stringify(answers));
+  window.location.href = "result.html";
+});
+</script>
+
+</body>
+</html>
