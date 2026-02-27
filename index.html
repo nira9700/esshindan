@@ -4,31 +4,47 @@
 <meta charset="UTF-8">
 <title>あんスタ推し診断</title>
 <style>
+/* 全体の横幅をスマホ向けに調整 */
+body {
+  margin: 0;
+  padding: 0 15px;
+  font-family: sans-serif;
+}
+
+#questions, #result {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 質問ブロック */
 .likert-block {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap; /* ← スマホで折り返しOK */
   margin: 20px 0;
 }
 
+/* 左右ラベル */
 .left-label, .right-label {
-  width: 120px;
+  width: 100px;
   font-size: 14px;
   text-align: center;
+  margin-bottom: 10px;
 }
 
+/* 丸の並び */
 .likert {
   display: flex;
-  gap: 10px;
+  gap: 14px; /* ← スマホで押しやすい */
+  justify-content: center;
+  flex: 1;
 }
 
-.likert input {
-  display: none;
-}
-
+/* 丸の大きさ（スマホ向けに大きめ） */
 .likert span {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: inline-block;
   border: 2px solid #ccc;
@@ -36,10 +52,46 @@
   transition: 0.2s;
 }
 
+.likert input {
+  display: none;
+}
+
 .likert input:checked + span {
-  background-color: #4CAF50; /* MBTI 風の緑 */
-  border-color: #4CAF50;
-  transform: scale(1.1);
+  background-color: #4A90E2;
+  border-color: #4A90E2;
+  transform: scale(1.15);
+}
+
+/* 結果画面の画像 */
+.char-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px auto;
+  display: block;
+}
+
+/* 一致度バー */
+.match-bar {
+  width: 90%;
+  height: 14px;
+  background: #eee;
+  border-radius: 7px;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+.match-bar-fill {
+  height: 100%;
+  background: #4CAF50;
+  transition: width 0.6s ease;
+}
+
+/* 結果全体を中央揃え */
+#result {
+  text-align: center;
+  margin-top: 40px;
 }
 </style>
 </head>
