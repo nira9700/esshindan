@@ -26,15 +26,17 @@ h1 {
 /* 質問ブロック */
 .likert-block {
   display: flex;
-  align-items: center;   /* ← これが縦方向の中央揃え */
+  align-items: center;   /* ← 丸とラベルの中心が揃う */
   justify-content: center;
-  gap: 20px;             /* ← ラベルと丸の間の余白 */
+  gap: 20px;
 }
 
 /* 左右ラベル */
 .left-label, .right-label {
-  width: 90px;           /* ← ラベルの横幅を統一 */
-  text-align: center;
+  display: flex;
+  align-items: center;   /* ← ラベルの文字の中心も揃う */
+  justify-content: center;
+  width: 90px;
   font-size: 16px;
 }
 
@@ -47,14 +49,46 @@ h1 {
 }
 
 /* 丸の大きさ（スマホ向けに大きめ） */
+/* 基本の丸（サイズはここでは指定しない） */
 .likert span {
-  width: 30px;
-  height: 30px;
+  display: inline-flex;
+  align-items: center;   /* ← 丸の内部の中心を揃える */
+  justify-content: center;
+  line-height: 0;        /* ← 高さズレ防止の決め手 */
   border-radius: 50%;
-  display: inline-block;
   border: 2px solid #ccc;
   cursor: pointer;
   transition: 0.2s;
+}
+
+/* 1番目（左端） → 一番大きい */
+.likert label:nth-child(1) span {
+  width: 32px;
+  height: 32px;
+}
+
+/* 2番目 → 中くらい */
+.likert label:nth-child(2) span {
+  width: 26px;
+  height: 26px;
+}
+
+/* 3番目（中央） → 一番小さい */
+.likert label:nth-child(3) span {
+  width: 20px;
+  height: 20px;
+}
+
+/* 4番目 → 中くらい */
+.likert label:nth-child(4) span {
+  width: 26px;
+  height: 26px;
+}
+
+/* 5番目（右端） → 一番大きい */
+.likert label:nth-child(5) span {
+  width: 32px;
+  height: 32px;
 }
 
 .likert input {
