@@ -6,12 +6,19 @@
 <style>
 /* 全体の横幅をスマホ向けに調整 */
 body {
-  margin: 0;
+  font-size: 18px;   /* ← 全体の文字が大きくなる */
+  line-height: 1.6;
   padding: 0 15px;
   font-family: sans-serif;
 }
 
-#questions, #result {
+h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-top: 20px;
+}
+
+#questions {
   max-width: 600px;
   margin: 0 auto;
 }
@@ -19,18 +26,16 @@ body {
 /* 質問ブロック */
 .likert-block {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap; /* ← スマホで折り返しOK */
-  margin: 20px 0;
+  align-items: center;   /* ← これが縦方向の中央揃え */
+  justify-content: center;
+  gap: 20px;             /* ← ラベルと丸の間の余白 */
 }
 
 /* 左右ラベル */
 .left-label, .right-label {
-  width: 100px;
-  font-size: 14px;
+  width: 90px;           /* ← ラベルの横幅を統一 */
   text-align: center;
-  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 /* 丸の並び */
@@ -62,6 +67,24 @@ body {
   transform: scale(1.15);
 }
 
+button[type="submit"] {
+  display: block;
+  margin: 30px auto;
+  padding: 14px 20px;
+  font-size: 20px;
+  width: 80%;          /* ← スマホで押しやすい */
+  max-width: 300px;
+  border-radius: 8px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
 /* 結果画面の画像 */
 .char-icon {
   width: 90px;
@@ -91,7 +114,12 @@ body {
 /* 結果全体を中央揃え */
 #result {
   text-align: center;
+  font-size: 18px;
   margin-top: 40px;
+}
+
+.rank-block h2, .rank-block h3 {
+  font-size: 24px;
 }
 </style>
 </head>
